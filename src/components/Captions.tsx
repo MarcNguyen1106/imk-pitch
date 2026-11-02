@@ -40,7 +40,24 @@ export const paginate = (words: Word[]): CaptionPage[] => {
 		if (sentenceEnd && lines.length === 2 && remaining > 0) flush();
 	});
 	flush();
-	return pages;
+	// Re-split each two-line page so the lines are balanced (no orphan words).
+	return pages.map((pg) => {
+		const idx = pg.lines.flat();
+		if (pg.lines.length < 2) return pg;
+		const len = (a: number[]) => a.reduce((n, i, k) => n + words[i].text.length + (k ? 1 : 0), 0);
+		let best = pg.lines;
+		let bestMax = Math.max(len(pg.lines[0]), len(pg.lines[1]));
+		for (let cut = 1; cut < idx.length; cut++) {
+			const a = idx.slice(0, cut);
+			const b = idx.slice(cut);
+			const m = Math.max(len(a), len(b));
+			if (len(a) <= MAX && len(b) <= MAX && m < bestMax) {
+				best = [a, b];
+				bestMax = m;
+			}
+		}
+		return {...pg, lines: best};
+	});
 };
 
 export const Captions: React.FC<{opacity?: number}> = ({opacity = 1}) => {

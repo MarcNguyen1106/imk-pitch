@@ -12,8 +12,10 @@
     "render:prompter": "remotion render Prompter out/prompter.mp4 --codec=h264 --crf=20 --pixel-format=yuv420p",
     "render:prompter-slow": "remotion render PrompterSlow out/prompter_slow.mp4 --codec=h264 --crf=20 --pixel-format=yuv420p",
     "render:final": "remotion render Final out/final.mp4 --codec=h264 --crf=18 --pixel-format=yuv420p",
-    "stills": "node scripts/stills.mjs",
-    "guides": "node scripts/write-guides.mjs"
+    "stills": "tsx scripts/states.mts && node scripts/stills.mjs && python3 scripts/contact-sheet.py",
+    "guides": "tsx scripts/write-guides.mts",
+    "states": "tsx scripts/states.mts",
+    "check-timing": "tsx scripts/check-timing.mts"
   },
   "dependencies": {
     "@remotion/bundler": "4.0.539",
@@ -30,10 +32,11 @@
   },
   "devDependencies": {
     "@types/d3-geo": "3.1.0",
+    "@types/geojson": "7946.0.16",
     "@types/qrcode": "1.5.5",
     "@types/react": "19.1.12",
     "@types/topojson-client": "3.1.5",
-    "@types/geojson": "7946.0.16",
+    "tsx": "^4.20.5",
     "typescript": "5.9.2"
   }
 }
