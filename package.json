@@ -1,0 +1,39 @@
+{
+  "name": "tn-pitch",
+  "version": "2.0.0",
+  "private": true,
+  "description": "MKTG3007 Part 3 elevator pitch motion-graphics package (Remotion)",
+  "scripts": {
+    "studio": "remotion studio",
+    "typecheck": "tsc --noEmit",
+    "render:animatic": "remotion render Animatic out/animatic.mp4 --codec=h264 --crf=18 --pixel-format=yuv420p",
+    "render:overlays": "remotion render Overlays out/overlays.mov --codec=prores --prores-profile=4444 --pixel-format=yuva444p10le --image-format=png",
+    "render:overlays-nocap": "remotion render Overlays out/overlays_nocaptions.mov --codec=prores --prores-profile=4444 --pixel-format=yuva444p10le --image-format=png --props='{\"showCaptions\":false}'",
+    "render:prompter": "remotion render Prompter out/prompter.mp4 --codec=h264 --crf=20 --pixel-format=yuv420p",
+    "render:prompter-slow": "remotion render PrompterSlow out/prompter_slow.mp4 --codec=h264 --crf=20 --pixel-format=yuv420p",
+    "render:final": "remotion render Final out/final.mp4 --codec=h264 --crf=18 --pixel-format=yuv420p",
+    "stills": "node scripts/stills.mjs",
+    "guides": "node scripts/write-guides.mjs"
+  },
+  "dependencies": {
+    "@remotion/bundler": "4.0.539",
+    "@remotion/cli": "4.0.539",
+    "@remotion/google-fonts": "4.0.539",
+    "@remotion/renderer": "4.0.539",
+    "d3-geo": "3.1.1",
+    "qrcode": "1.5.4",
+    "react": "19.1.1",
+    "react-dom": "19.1.1",
+    "remotion": "4.0.539",
+    "topojson-client": "3.1.0",
+    "world-atlas": "2.0.2"
+  },
+  "devDependencies": {
+    "@types/d3-geo": "3.1.0",
+    "@types/qrcode": "1.5.5",
+    "@types/react": "19.1.12",
+    "@types/topojson-client": "3.1.5",
+    "@types/geojson": "7946.0.16",
+    "typescript": "5.9.2"
+  }
+}
